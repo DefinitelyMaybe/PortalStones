@@ -1,0 +1,74 @@
+
+GameObjects
+{
+	PlaceableObject
+	{
+		Portal Stone
+		{
+			Transform
+			{
+			}
+
+			Script
+			{
+				file = "Scripts/Objects/PortalStone.lua"
+				class = "PortalStone"
+				arguments
+				{
+					encumbrance = 70
+					dataMetricCategory = "Alchemical"
+				}
+			}
+
+			StaticGraphics
+			{
+				model = "Models/PlaceableObjects/Refined/MagicStonePillar.obj"
+				Diffuse
+				{
+					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff3.png"
+				}
+				Normal
+				{
+					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Norm.png"
+				}
+
+			}
+			RigidBody
+			{
+				activePhysics = 1
+				mass = 800.0
+				friction = 10.0	
+			}
+			Placeable
+			{
+				name = "Portal Stone"
+				icon = "PortalStone_icon"
+				minScale = .5
+				maxScale = .5
+
+				placementSound = "StonePlace"
+				removalSound = "StoneDig"
+				miningEmitter = "Strike Rock White Emitter"
+
+				category = "Stone"
+				tier = 3
+				resource = 1
+
+				placeWithNoPhysics = 1
+				tetherDistanceModifier = 2.0
+				survivalRotOffset = [0.0, 1.0, 0.0, 0.0]
+				survivalPosOffset = <0.0, 0.0, 0.0>
+				survivalFaceCamera = 1
+				maxStackCount = 1
+			}
+
+			Children
+			{
+				Wisp Blue Body Emitter
+				{
+					offset = <0.0, 4.25, 0.0>
+				}
+			}
+		}
+	}
+}

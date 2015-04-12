@@ -1,0 +1,35 @@
+All Recipes
+{
+	Portal Stone Recipe
+	{	
+		Script = "Scripts/Recipes/DefaultRecipe.lua"
+
+		LuaData
+		{
+			craftTime = 5.0
+			
+			Components
+			{
+				Part1
+				{
+					"Cobblestone" = 400
+				}
+				Part2
+				{
+					"Black Rock" = 1
+				}
+			}
+
+			Crafting Tool
+			{
+				category = "Hammer"
+				tier = 3
+			}
+			
+			Results
+			{
+				"Portal Stone" = 1
+			}
+		}
+	}
+}
