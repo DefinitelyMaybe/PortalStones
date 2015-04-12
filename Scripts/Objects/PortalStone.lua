@@ -54,7 +54,9 @@ function PortalStone:Spawn()
 		self:NKSetEmitterActive(true)
 	end
 
-	self.direction_Vec = self:NKGetWorldOrientation():Forward():normalize():mul_scalar(2.0)
+	--These two vectors appear to be on opposite corners of the Portal Stone
+	--self.direction_Vec = vec3.new(2.0, 0.0, 2.0):mul_quat(self:NKGetWorldOrientation())
+	self.direction_Vec = self:NKGetWorldOrientation():Forward():mul_scalar(2.0)
 end
 
 -------------------------------------------------------------------------------
@@ -88,7 +90,7 @@ function PortalStone:ClientEvent_TeleportToLinked(args)
 	local worldPlayer = args.playerToAffect:NKGetWorldPlayer()
 
 	--Adding the other stones direction vector to the teleport location.
-	worldPlayer:NKTeleportToLocation(self.linked_Position + self.direction_Vec)
+	worldPlayer:NKTeleportToLocation(self.linked_Position + self.linked_Object.direction_Vec)
 end
 
 -------------------------------------------------------------------------------

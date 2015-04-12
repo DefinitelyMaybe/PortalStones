@@ -17,6 +17,9 @@ GameObjects
 				{
 					encumbrance = 70
 					dataMetricCategory = "Alchemical"
+					UBPcraft = 4
+					LBPcraft = 4
+					XPcraft = 8
 				}
 			}
 
