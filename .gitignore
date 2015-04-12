@@ -11,6 +11,8 @@ luac.out
 *.os
 *.ko
 *.elf
+*.hkt
+*.dds
 
 # Precompiled Headers
 *.gch
