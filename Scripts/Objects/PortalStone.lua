@@ -53,10 +53,8 @@ function PortalStone:Spawn()
 	if self.linked then
 		self:NKSetEmitterActive(true)
 	end
-
-	--These two vectors appear to be on opposite corners of the Portal Stone
-	--self.direction_Vec = vec3.new(2.0, 0.0, 2.0):mul_quat(self:NKGetWorldOrientation())
-	self.direction_Vec = self:NKGetWorldOrientation():Forward():mul_scalar(2.0)
+	--The vector relative to the stone's direction/rotation.
+	self.direction_Vec = vec3.new(0.0, 0.0, 2.0):mul_quat(self:NKGetWorldOrientation())
 end
 
 -------------------------------------------------------------------------------
