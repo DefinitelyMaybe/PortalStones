@@ -17,5 +17,3 @@ To do list:
 	-added a particle emitter to easily identify linked portal stones.
 	
 	-changing teleportation location to be related to stone direction. (In progress)
-	
-	-Crafting bug?
