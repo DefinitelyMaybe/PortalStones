@@ -97,7 +97,7 @@ end
 function PortalStone:ClientEvent_TeleportToLinked(args)
 	local worldPlayer = args.playerToAffect:NKGetWorldPlayer()
 
-	--Adding the 2 unit vector of the other stones direction to the teleport location.
+	--Adding the other stones direction vector to the teleport location.
 	worldPlayer:NKTeleportToLocation(self.linkedposition + self.linkedobject.direction_vec)
 end
 
@@ -114,7 +114,6 @@ end
 function PortalStone:Restore( inData, version )
 	if inData.linked then
 		self.linked = true
-		self:NKSetEmitterActive(true)
 		self.linkedposition = vec3.new(inData.linkedposition.x, inData.linkedposition.y, inData.linkedposition.z)
 
 		--Getting the linked objects instance for resetting links between sessions.
