@@ -55,13 +55,6 @@ function PortalStone:Spawn()
 	end
 
 	self.direction_Vec = self:NKGetWorldOrientation():Forward():normalize():mul_scalar(2.0)
-	--I'm not sure about the vec 3.
-	--I normalize the vector so that I know I have a vector with length 1 to multiple by in the next lines.
-	--self.direction_vec = (self:NKGetWorldOrientation():Forward()):normalize()
-	--NKWarn(self.direction_vec:NKToString())
-	--So my hope is that this is 2 units away from the Portal stone in the direction of this object
-	--self.direction_vec = self.direction_vec:mul_scalar(2.0)
-
 end
 
 -------------------------------------------------------------------------------
