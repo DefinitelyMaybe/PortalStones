@@ -40,9 +40,12 @@ function PortalStone:Interact( args )
 	if not self.linked then
 		return false
 	end
-	self:RaiseClientEvent("ClientEvent_TeleportToLinked", {
-		playerToAffect = args.player.object
-		})
+
+	if self.linked_Object then
+		self:RaiseClientEvent("ClientEvent_TeleportToLinked", {
+			playerToAffect = args.player.object
+			})
+	end
 	--Don't drop held object if Portal Stone was linked.
 	return true
 end
@@ -59,9 +62,10 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStone:Despawn()
-	--Reseting the linked Stone's values first.
 	if self.linked then
-		self.linked_Object:RaiseClientEvent("ClientEvent_ResetLink", {})
+		if self.linked_Object then
+			self.linked_Object:RaiseClientEvent("ClientEvent_ResetLink", {})
+		end
 	end
 	self:RaiseClientEvent("ClientEvent_ResetLink", {})
 	self.direction_Vec = vec3.new(0.0, 0.0, 0.0)
