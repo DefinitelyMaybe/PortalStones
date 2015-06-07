@@ -16,31 +16,20 @@ NKRegisterEvent("ClientEvent_TeleportToLinked",
 
 NKRegisterEvent("ClientEvent_SetLink",
 	{
-	toObject = "gameobject",
 	toPosition = "vec3"
 	}
 )
-NKRegisterEvent("ClientEvent_ResetLink",
-	{
-	}
-)
-
 
 -------------------------------------------------------------------------------
 function PortalStone:Constructor(args)
-	self.linked = false
-	self.linked_Position = vec3.new(0.0, 0.0, 0.0)
-	self.direction_Vec = vec3.new(0.0, 0.0, 0.0)
-	self.linked_Object = nil
+	self.linkedPosition = nil
 end
 
 -------------------------------------------------------------------------------
 function PortalStone:Interact( args )
-	if not self.linked then
+	if not self.linkedPosition then
 		return false
-	end
-
-	if self.linked_Object then
+	elseif self.linkedPosition then
 		self:RaiseClientEvent("ClientEvent_TeleportToLinked", {
 			playerToAffect = args.player.object
 			})
@@ -51,78 +40,66 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStone:TryPickup( target )
-	if self.linked then
-		if self.linked_Object then
-			self.linked_Object:RaiseClientEvent("ClientEvent_ResetLink", {})
-		end
-		self:RaiseClientEvent("ClientEvent_ResetLink", {})
-		self.direction_Vec = vec3.new(0.0, 0.0, 0.0)
-	end
+	self.linkedPosition = nil
+	self:NKSetEmitterActive(false)
 	return true
 end
 
 -------------------------------------------------------------------------------
 function PortalStone:Spawn()
-	self:NKSetEmitterActive(false)
-	if self.linked then
-		self:NKSetEmitterActive(true)
+	if self.linkedPosition then
+		if self.IsLive() then
+			self:NKSetEmitterActive(true)
+		else
+			self.linkedPosition = nil
+			self:NKSetEmitterActive(false)
+		end
+	else
+		self:NKSetEmitterActive(false)
 	end
-	--The vector relative to the stone's direction/rotation.
-	self.direction_Vec = vec3.new(0.0, 0.0, 2.0):mul_quat(self:NKGetWorldOrientation())
 end
 
 -------------------------------------------------------------------------------
 function PortalStone:ClientEvent_SetLink(args)
-	self.linked_Position = vec3.new(args.toPosition:x(), args.toPosition:y(), args.toPosition:z())
-	self.linked_Object = args.toObject:NKGetInstance()
-	self.linked = true
+	self.linkedPosition = vec3.new(args.toPosition:x(), args.toPosition:y(), args.toPosition:z())
 	self:NKSetEmitterActive(true)
-end
-
--------------------------------------------------------------------------------
-function PortalStone:ClientEvent_ResetLink()
-	self.linked = false
-	self.linked_Position = vec3.new(0.0, 0.0, 0.0)
-	self.linked_Object = nil
-	self:NKSetEmitterActive(false)
 end
 
 -------------------------------------------------------------------------------
 function PortalStone:ClientEvent_TeleportToLinked(args)
 	local worldPlayer = args.playerToAffect:NKGetWorldPlayer()
-
-	--Adding the other stones direction vector to the teleport location.
-	worldPlayer:NKTeleportToLocation(self.linked_Position + self.linked_Object.direction_Vec)
+	worldPlayer:NKTeleportToLocation(self.linkedPosition)
 end
 
 -------------------------------------------------------------------------------
+function PortalStone:IsLive()
+	--checking whether a portal stone is still at the exit.
+	local minPos = vec3.new(-.5)
+	local maxPos = vec3.new(.5)
+	local gameobjects = NKPhysics.AABBOverlapCollect(minPos, maxPos, self.linkedPosition)
+	if gameobjects then
+		for objID, objData in pairs(gameobjects) do
+			local objName = objData:NKGetName()
+			if objName == "Portal Stone" then
+				return true
+			end
+		end
+	end
+	return false
+end
+-------------------------------------------------------------------------------
 function PortalStone:Save( outData )
 	PortalStone.__super.Save(self, outData)
-	if self.linked then
-		outData.linked = true
-		outData.linked_Position = {x=self.linked_Position:x(), y=self.linked_Position:y(),	z=self.linked_Position:z()}
+	if self.linkedPosition then
+		outData.linkedPosition = {x=self.linkedPosition:x(), y=self.linkedPosition:y(),	z=self.linkedPosition:z()}
 	end
 end
 
 -------------------------------------------------------------------------------
 function PortalStone:Restore( inData, version )
-	if inData.linked then
-		self.linked = true
-		self.linked_Position = vec3.new(inData.linked_Position.x, inData.linked_Position.y, inData.linked_Position.z)
-
-		--Getting the linked objects instance for resetting links between sessions.
-		local minPos = vec3.new(-.5)
-		local maxPos = vec3.new(.5)
-		local gameobjects = NKPhysics.AABBOverlapCollect(minPos, maxPos, self.linked_Position)
-		if gameobjects then
-			for objID, objData in pairs(gameobjects) do
-				local objName = objData:NKGetName()
-				if objName == "Portal Stone" then
-					self.linked_Object = objData:NKGetInstance()
-					objData:NKGetInstance().linked_Object = self:NKGetInstance()
-				end
-			end
-		end
+	if inData.linkedPosition then
+		self.linkedPosition = vec3.new(inData.linkedPosition.x, 
+			inData.linkedPosition.y, inData.linkedPosition.z)
 	end
 end
 
