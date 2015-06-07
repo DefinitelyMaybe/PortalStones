@@ -42,3 +42,4 @@ end
 
 -------------------------------------------------------------------------------
 EntityFramework:RegisterGameObject(PortalLinker)
+

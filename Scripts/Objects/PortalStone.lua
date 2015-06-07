@@ -32,7 +32,6 @@ function PortalStone:Constructor(args)
 	self.linked_Position = vec3.new(0.0, 0.0, 0.0)
 	self.direction_Vec = vec3.new(0.0, 0.0, 0.0)
 	self.linked_Object = nil
-	self:NKSetEmitterActive(false)
 end
 
 -------------------------------------------------------------------------------
@@ -51,6 +50,18 @@ function PortalStone:Interact( args )
 end
 
 -------------------------------------------------------------------------------
+function PortalStone:TryPickup( target )
+	if self.linked then
+		if self.linked_Object then
+			self.linked_Object:RaiseClientEvent("ClientEvent_ResetLink", {})
+		end
+		self:RaiseClientEvent("ClientEvent_ResetLink", {})
+		self.direction_Vec = vec3.new(0.0, 0.0, 0.0)
+	end
+	return true
+end
+
+-------------------------------------------------------------------------------
 function PortalStone:Spawn()
 	self:NKSetEmitterActive(false)
 	if self.linked then
@@ -58,17 +69,6 @@ function PortalStone:Spawn()
 	end
 	--The vector relative to the stone's direction/rotation.
 	self.direction_Vec = vec3.new(0.0, 0.0, 2.0):mul_quat(self:NKGetWorldOrientation())
-end
-
--------------------------------------------------------------------------------
-function PortalStone:Despawn()
-	if self.linked then
-		if self.linked_Object then
-			self.linked_Object:RaiseClientEvent("ClientEvent_ResetLink", {})
-		end
-	end
-	self:RaiseClientEvent("ClientEvent_ResetLink", {})
-	self.direction_Vec = vec3.new(0.0, 0.0, 0.0)
 end
 
 -------------------------------------------------------------------------------
