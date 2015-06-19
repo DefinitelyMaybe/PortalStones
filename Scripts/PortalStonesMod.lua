@@ -1,9 +1,11 @@
--- CustomCommandsScript
-include("Scripts/Core/Common.lua")
-
+--PortalStonesMod
 -------------------------------------------------------------------------------
 if PortalStonesMod == nil then
 	PortalStonesMod = EternusEngine.ModScriptClass.Subclass("PortalStonesMod")
+end
+
+-------------------------------------------------------------------------------
+function PortalStonesMod:Constructor()
 end
 
  -------------------------------------------------------------------------------

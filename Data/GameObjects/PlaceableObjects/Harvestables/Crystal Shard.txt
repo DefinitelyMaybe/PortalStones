@@ -2,217 +2,10 @@ GameObjects
 {
 	PlaceableObject
 	{
-		Blue Crystal Shard
-		{
-			Transform
-			{
-			}
-				
-			Script
-			{
-				file = "Scripts/Objects/PortalLinker.lua"
-				class = "PortalLinker"
-				
-				arguments
-				{
-					category = "Rock"
-					dataMetricCategory = "Crystal Shard"
-					ambSound = "Crystal_C"
-					encumberance = 1
-				}
-			}
-					
-			StaticGraphics
-			{
-				model = "Models/PlaceableObjects/Rocks/crystalShard.obj"
-			
-				Diffuse
-				{
-					0 = "Models/PlaceableObjects/Rocks/crystalBlueCrystal_diff.tga"
-				}		
-			
-				Glow
-				{
-					0 = "Models/PlaceableObjects/Rocks/crystal_glow.tga"
-				}
-		
-			}
-			
-			RigidBody
-			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
-			}
-			
-			Placeable
-			{
-				name = "Blue Crystal Shard"
-				icon = "crystalShardBlue"
-				minScale = 0.5
-				maxScale = 11.0
-
-				category = "Rock"
-				tier = 4
-				resource = 1				
-				maxStackCount = 10
-				craftingArchetype = "Crystal Shard"
-
-				placementSound = "StonePlace"
-				removalSound = "MetalDig"
-				miningEmitter = "Strike BlueCrystal Emitter"
-				miningEmitterAlt = "Strike Glint Emitter"
-			}
-
-			Light
-			{
-				lightRadius = 5.0
-				lightOffset = <0.0, 3.5, 0.0>
-				lightColor = <0.0, 0.0, 0.2>
-			}
-		}
-		
-		Froststone Shard
-		{
-			Script
-			{
-				file = "Scripts/Objects/PortalLinker.lua"
-				class = "PortalLinker"
-				
-				arguments
-				{
-					category = "Rock"
-					dataMetricCategory = "Crystal Shard"
-					ambSound = "Crystal_ASharp"
-					encumberance = 1
-				}
-			}
-			
-			Transform
-			{
-			}
-			
-			StaticGraphics
-			{
-				model = "Models/PlaceableObjects/Rocks/crystalShard.obj"
-				Diffuse
-				{
-					0 = "Models/PlaceableObjects/Rocks/crystalFroststone_diff.tga"
-				}		
-				Glow
-				{
-					0 = "Models/PlaceableObjects/Rocks/crystal_glow.tga"
-				}
-		
-			}
-			
-			RigidBody
-			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
-			}
-			
-			Placeable
-			{
-				name = "Froststone Shard"
-				icon = "crystalShardFroststone"
-				minScale = 0.5
-				maxScale = 11.0
-
-				category = "Rock"
-				tier = 4
-				resource = 1				
-				maxStackCount = 10
-				craftingArchetype = "Crystal Shard"
-
-				placementSound = "StonePlace"
-				removalSound = "MetalDig"
-				miningEmitter = "Strike Snow Emitter"
-				miningEmitterAlt = "Strike Glint Emitter"
-			}
-
-			Light
-			{
-				lightRadius = 5.0
-				lightOffset = <0.0, 3.5, 0.0>
-				lightColor = <0.2, 0.2, 0.2>
-			}
-
-		}		
-		
-		Sapphire Shard
-		{
-			Transform
-			{
-			}
-		
-			Script
-			{
-				file = "Scripts/Objects/PortalLinker.lua"
-				class = "PortalLinker"
-				
-				arguments
-				{
-					category = "Rock"
-					dataMetricCategory = "Crystal Shard"
-					ambSound = "Crystal_CSharp"
-					encumberance = 1
-				}
-			}
-										
-			StaticGraphics
-			{
-				model = "Models/PlaceableObjects/Rocks/crystalShard.obj"
-			
-				Diffuse
-				{
-					0 = "Models/PlaceableObjects/Rocks/crystalSapphire_diff.tga"
-				}	
-			
-				Glow
-				{
-					0 = "Models/PlaceableObjects/Rocks/crystal_glow.tga"
-				}
-			
-			}
-			
-			RigidBody
-			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
-			}
-			
-			Placeable
-			{
-				name = "Sapphire Shard"
-				icon = "crystalShardSapphire"
-				minScale = 0.5
-				maxScale = 11.0
-
-				category = "Rock"
-				tier = 4
-				resource = 1				
-				maxStackCount = 10
-				craftingArchetype = "Crystal Shard"
-
-				placementSound = "StonePlace"
-				removalSound = "MetalDig"
-				miningEmitter = "Strike Sapphire Emitter"
-				miningEmitterAlt = "Strike Glint Emitter"
-			}
-
-			Light
-			{
-				lightRadius = 5.0
-				lightOffset = <0.0, 3.5, 0.0>
-				lightColor = <0.0, 0.0, 0.2>
-			}
-		}
-		
 		Ruby Shard
 		{
+			Tag = "Harvestables"
+
 			Transform
 			{
 			}
@@ -226,7 +19,7 @@ GameObjects
 				{
 					category = "Rock"
 					dataMetricCategory = "Crystal Shard"
-					ambSound = "Crystal_E"				
+					ambSound = "Crystal_E"
 					encumberance = 1
 				}
 			}
@@ -246,13 +39,25 @@ GameObjects
 				}
 			}
 			
-			RigidBody
+			Physics
 			{
-				activePhysics = 0
-				mass = 700
-				friction = 3
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
-			
+
 			Placeable
 			{
 				name = "Ruby Shard"
@@ -263,8 +68,8 @@ GameObjects
 				category = "Rock"
 				resource = 1
 				tier = 4
-				maxStackCount = 10		
-				craftingArchetype = "Crystal Shard"						
+				maxStackCount = 10
+				craftingArchetype = "Crystal Shard"
 
 				placementSound = "StonePlace"
 				removalSound = "MetalDig"
@@ -282,6 +87,8 @@ GameObjects
 	
 		Topaz Shard
 		{
+			Tag = "Harvestables"
+
 			Transform
 			{
 			}
@@ -295,7 +102,7 @@ GameObjects
 				{
 					category = "Rock"
 					dataMetricCategory = "Crystal Shard"
-					ambSound = "Crystal_DSharp"				
+					ambSound = "Crystal_DSharp"
 					encumberance = 1
 				}
 			}
@@ -307,7 +114,7 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Rocks/crystalTopaz_diff.tga"
-				}	
+				}
 				
 				Glow
 				{
@@ -316,11 +123,23 @@ GameObjects
 			
 			}
 			
-			RigidBody
+			Physics
 			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
 			
 			Placeable
@@ -332,8 +151,8 @@ GameObjects
 
 				category = "Rock"
 				tier = 4
-				resource = 1				
-				maxStackCount = 10				
+				resource = 1
+				maxStackCount = 10
 				craftingArchetype = "Crystal Shard"
 
 				placementSound = "StonePlace"
@@ -348,10 +167,12 @@ GameObjects
 				lightOffset = <0.0, 3.5, 0.0>
 				lightColor = <0.2, 0.2, 0.0>
 			}
-		}	
+		}
 
 		Firestone Shard
 		{
+			Tag = "Harvestables"
+
 			Transform
 			{
 			}
@@ -377,7 +198,7 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Rocks/crystalFirestone_diff.tga"
-				}	
+				}
 				
 				Glow
 				{
@@ -386,11 +207,23 @@ GameObjects
 			
 			}
 			
-			RigidBody
+			Physics
 			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
 			
 			Placeable
@@ -402,8 +235,8 @@ GameObjects
 
 				category = "Rock"
 				tier = 4
-				resource = 1				
-				maxStackCount = 10				
+				resource = 1
+				maxStackCount = 10
 				craftingArchetype = "Crystal Shard"
 
 				placementSound = "StonePlace"
@@ -416,7 +249,7 @@ GameObjects
 			{
 				lightRadius = 5.0
 				lightOffset = <0.0, 3.5, 0.0>
-				lightColor = <0.2, 0.2, 0.0>	
+				lightColor = <0.2, 0.2, 0.0>
 			}
 			
 			Children
@@ -425,11 +258,13 @@ GameObjects
 				{
 					offset = <0.0, 0.0, 0.0>
 				}
-			}			
+			}
 		}
 
 		Citrine Shard
 		{
+			Tag = "Harvestables"
+
 			Transform
 			{
 			}
@@ -455,7 +290,7 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Rocks/crystalCitrine_diff.tga"
-				}		
+				}
 				
 				Glow
 				{
@@ -464,11 +299,23 @@ GameObjects
 		
 			}
 			
-			RigidBody
+			Physics
 			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
 			
 			Placeable
@@ -480,8 +327,8 @@ GameObjects
 				
 				category = "Rock"
 				tier = 4
-				resource = 1				
-				maxStackCount = 10				
+				resource = 1
+				maxStackCount = 10
 				craftingArchetype = "Crystal Shard"
 
 				placementSound = "StonePlace"
@@ -494,12 +341,14 @@ GameObjects
 			{
 				lightRadius = 5.0
 				lightOffset = <0.0, 3.5, 0.0>
-				lightColor = <0.2, 0.2, 0.2>	
+				lightColor = <0.2, 0.2, 0.2>
 			}
-		}	
+		}
 
 		Peridot Shard
 		{
+			Tag = "Harvestables"
+
 			Transform
 			{
 			}
@@ -513,7 +362,7 @@ GameObjects
 				{
 					category = "Rock"
 					dataMetricCategory = "Crystal Shard"
-					ambSound = "Crystal_FSharp"				
+					ambSound = "Crystal_FSharp"
 					encumberance = 1
 				}
 			}
@@ -525,7 +374,7 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Rocks/crystalPeridot_diff.tga"
-				}	
+				}
 				
 				Glow
 				{
@@ -534,11 +383,23 @@ GameObjects
 			
 			}
 			
-			RigidBody
+			Physics
 			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
 			
 			Placeable
@@ -550,7 +411,7 @@ GameObjects
 
 				category = "Rock"
 				tier = 4
-				resource = 1				
+				resource = 1
 				maxStackCount = 10
 				craftingArchetype = "Crystal Shard"
 
@@ -558,7 +419,7 @@ GameObjects
 				removalSound = "MetalDig"
 				miningEmitter = "Strike Peridot Emitter"
 				miningEmitterAlt = "Strike Glint Emitter"
-			} 
+			}
 
 			Light
 			{
@@ -568,8 +429,268 @@ GameObjects
 			}
 		}
 
+		Blue Crystal Shard
+		{
+			Tag = "Harvestables"
+
+			Transform
+			{
+			}
+				
+			Script
+			{
+				file = "Scripts/Objects/PortalLinker.lua"
+				class = "PortalLinker"
+				
+				arguments
+				{
+					category = "Rock"
+					dataMetricCategory = "Crystal Shard"
+					ambSound = "Crystal_C"
+					encumberance = 1
+				}
+			}
+					
+			StaticGraphics
+			{
+				model = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+			
+				Diffuse
+				{
+					0 = "Models/PlaceableObjects/Rocks/crystalBlueCrystal_diff.tga"
+				}
+			
+				Glow
+				{
+					0 = "Models/PlaceableObjects/Rocks/crystal_glow.tga"
+				}
+		
+			}
+			
+			Physics
+			{
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
+			}
+			
+			Placeable
+			{
+				name = "Blue Crystal Shard"
+				icon = "crystalShardBlue"
+				minScale = 0.5
+				maxScale = 11.0
+
+				category = "Rock"
+				tier = 4
+				resource = 1
+				maxStackCount = 10
+				craftingArchetype = "Crystal Shard"
+
+				placementSound = "StonePlace"
+				removalSound = "MetalDig"
+				miningEmitter = "Strike BlueCrystal Emitter"
+				miningEmitterAlt = "Strike Glint Emitter"
+			}
+
+			Light
+			{
+				lightRadius = 5.0
+				lightOffset = <0.0, 3.5, 0.0>
+				lightColor = <0.0, 0.0, 0.2>
+			}
+		}
+		
+		Froststone Shard
+		{
+			Tag = "Harvestables"
+
+			Script
+			{
+				file = "Scripts/Objects/PortalLinker.lua"
+				class = "PortalLinker"
+				
+				arguments
+				{
+					category = "Rock"
+					dataMetricCategory = "Crystal Shard"
+					ambSound = "Crystal_ASharp"
+					encumberance = 1
+				}
+			}
+			
+			Transform
+			{
+			}
+			
+			StaticGraphics
+			{
+				model = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+				Diffuse
+				{
+					0 = "Models/PlaceableObjects/Rocks/crystalFroststone_diff.tga"
+				}
+				Glow
+				{
+					0 = "Models/PlaceableObjects/Rocks/crystal_glow.tga"
+				}
+		
+			}
+			
+			Physics
+			{
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
+			}
+			
+			Placeable
+			{
+				name = "Froststone Shard"
+				icon = "crystalShardFroststone"
+				minScale = 0.5
+				maxScale = 11.0
+
+				category = "Rock"
+				tier = 4
+				resource = 1
+				maxStackCount = 10
+				craftingArchetype = "Crystal Shard"
+
+				placementSound = "StonePlace"
+				removalSound = "MetalDig"
+				miningEmitter = "Strike Snow Emitter"
+				miningEmitterAlt = "Strike Glint Emitter"
+			}
+
+			Light
+			{
+				lightRadius = 5.0
+				lightOffset = <0.0, 3.5, 0.0>
+				lightColor = <0.2, 0.2, 0.2>
+			}
+
+			// Children
+			// {
+				// Mist 1 Emitter
+				// {
+					// offset = <0.0, 0.0, 0.0>
+				// }
+			// }
+		}
+		
+		Sapphire Shard
+		{
+			Tag = "Harvestables"
+
+			Transform
+			{
+			}
+		
+			Script
+			{
+				file = "Scripts/Objects/PortalLinker.lua"
+				class = "PortalLinker"
+				
+				arguments
+				{
+					category = "Rock"
+					dataMetricCategory = "Crystal Shard"
+					ambSound = "Crystal_CSharp"
+					encumberance = 1
+				}
+			}
+										
+			StaticGraphics
+			{
+				model = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+			
+				Diffuse
+				{
+					0 = "Models/PlaceableObjects/Rocks/crystalSapphire_diff.tga"
+				}
+			
+				Glow
+				{
+					0 = "Models/PlaceableObjects/Rocks/crystal_glow.tga"
+				}
+			
+			}
+			
+			Physics
+			{
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
+			}
+			
+			Placeable
+			{
+				name = "Sapphire Shard"
+				icon = "crystalShardSapphire"
+				minScale = 0.5
+				maxScale = 11.0
+
+				category = "Rock"
+				tier = 4
+				resource = 1
+				maxStackCount = 10
+				craftingArchetype = "Crystal Shard"
+
+				placementSound = "StonePlace"
+				removalSound = "MetalDig"
+				miningEmitter = "Strike Sapphire Emitter"
+				miningEmitterAlt = "Strike Glint Emitter"
+			}
+
+			Light
+			{
+				lightRadius = 5.0
+				lightOffset = <0.0, 3.5, 0.0>
+				lightColor = <0.0, 0.0, 0.2>
+			}
+		}
+		
 		Amethyst Shard
 		{
+			Tag = "Harvestables"
+
 			Transform
 			{
 			}
@@ -595,7 +716,7 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Rocks/crystalAmethyst_diff.tga"
-				}	
+				}
 				
 				Glow
 				{
@@ -604,11 +725,23 @@ GameObjects
 			
 			}
 			
-			RigidBody
+			Physics
 			{
-				activePhysics = 0
-				mass = 700.0
-				friction = 3.0			
+				Colliders
+				{
+					Mesh
+					{
+						mass = 700.0
+						convex = 0
+						--decompose = 1
+						mesh = "Models/PlaceableObjects/Rocks/crystalShard.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
 			
 			Placeable
@@ -620,14 +753,14 @@ GameObjects
 
 				category = "Rock"
 				tier = 4
-				resource = 1				
+				resource = 1
 				maxStackCount = 10
 				craftingArchetype = "Crystal Shard"
 	
 				placementSound = "StonePlace"
 				removalSound = "MetalDig"
 				miningEmitter = "Strike Amethyst Emitter"
-				miningEmitterAlt = "Strike Glint Emitter"			
+				miningEmitterAlt = "Strike Glint Emitter"
 			}
 
 			Light

@@ -1,27 +1,30 @@
 include("Scripts/Objects/Equipable.lua")
+include("Scripts/Mixins/Usable.lua")
 
 -------------------------------------------------------------------------------
 PortalLinker = Equipable.Subclass("PortalLinker")
 
 -------------------------------------------------------------------------------
-function PortalLinker:Constructor( args )
-	self.referencePos = nil
+function PortalLinker:Constructor(args)
+	self.StonePos = nil
 end
 
 -------------------------------------------------------------------------------
-function PortalLinker:SecondaryAction( args )
+function PortalLinker:SecondaryAction(args)
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
-		local object = args.targetObj:NKGetInstance()
-		if not self.referencePos then
-			--Can change this value to the players position instead. 
-			--This would be done in the case where the position clips through surfaces.
-			self.referencePos = object:NKGetWorldPosition() + vec3.new(0.0, 0.0, 2.0):mul_quat(object:NKGetWorldOrientation())
-		elseif not (self.referencePos == object.linkedPosition) then
-			object:RaiseClientEvent("ClientEvent_SetLink", {
-				toPosition = self.referencePos
-				})
-			self.referenceObject = nil
-			self:ModifyStackSize(-1)
+		local Stone = args.targetObj:NKGetInstance()
+		local StoneTele = args.targetObj:NKGetWorldPosition() + 
+			vec3.new(0.0, 0.0, 2.0):mul_quat(args.targetObj:NKGetWorldOrientation())
+
+		if self.StonePos then
+			if not (self.StonePos == StoneTele) then
+				Stone:RaiseClientEvent("ClientEvent_SetLink", {
+					toPosition = self.StonePos})
+				self.StonePos = nil
+				self:ModifyStackSize(-1)
+			end
+		else
+			self.StonePos = StoneTele
 		end
 	else
 		return false

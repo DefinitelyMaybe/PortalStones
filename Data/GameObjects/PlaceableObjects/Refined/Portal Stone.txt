@@ -1,10 +1,11 @@
-
 GameObjects
 {
 	PlaceableObject
 	{
 		Portal Stone
 		{
+			Tag = "Refined"
+
 			Transform
 			{
 			}
@@ -15,7 +16,7 @@ GameObjects
 				class = "PortalStone"
 				arguments
 				{
-					encumbrance = 70
+					encumbrance = 2
 					dataMetricCategory = "Alchemical"
 					UBPcraft = 4
 					LBPcraft = 4
@@ -29,39 +30,54 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff3.png"
+					1 = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff.png"
 				}
 				Normal
 				{
 					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Norm.png"
 				}
+				Glow
+				{
+					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Glow.png"
+				}
 
 			}
-			RigidBody
+
+			Physics
 			{
-				activePhysics = 1
-				mass = 800.0
-				friction = 10.0	
+				Colliders
+				{
+					Mesh
+					{
+						mass = 100
+						convex = 0
+						mesh = "Models/PlaceableObjects/Refined/MagicStonePillar.obj"
+					}
+				}
+
+				Rigidbody
+				{
+					keyframed = 1
+				}
 			}
+
 			Placeable
 			{
 				name = "Portal Stone"
-				icon = "PortalStone_icon"
-				minScale = .5
-				maxScale = .5
-
-				placementSound = "StonePlace"
-				removalSound = "StoneDig"
-				miningEmitter = "Strike Rock White Emitter"
+				icon = "PortalStone"
+				minScale = 1
+				maxScale = 1
 
 				category = "Stone"
 				tier = 3
 				resource = 1
-
+				maxStackCount = 10
 				placeWithNoPhysics = 1
-				tetherDistanceModifier = 2.0
-				survivalPosOffset = <0.0, 0.0, 0.0>
+				
 				survivalFaceCamera = 1
-				maxStackCount = 1
+				tetherDistanceModifier = 2.0
+																
+				placementSound = "StonePlace"
 			}
 
 			Children

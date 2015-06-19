@@ -4,17 +4,15 @@ include("Scripts/Objects/PlaceableObject.lua")
 -------------------------------------------------------------------------------
 PortalStone = PlaceableObject.Subclass("PortalStone")
 
-local NKPhysics = include("Scripts/Core/NKPhysics.lua")
-
 -------------------------------------------------------------------------------
 --Register Events
-NKRegisterEvent("ClientEvent_TeleportToLinked",
+PortalStone.RegisterScriptEvent("ClientEvent_TeleportToLinked",
 	{
 	playerToAffect = "gameobject"
 	}
 )
 
-NKRegisterEvent("ClientEvent_SetLink",
+PortalStone.RegisterScriptEvent("ClientEvent_SetLink",
 	{
 	toPosition = "vec3"
 	}
@@ -22,14 +20,13 @@ NKRegisterEvent("ClientEvent_SetLink",
 
 -------------------------------------------------------------------------------
 function PortalStone:Constructor(args)
+	--Note: The only "false" values in lua are nil and false.
 	self.linkedPosition = nil
 end
 
 -------------------------------------------------------------------------------
-function PortalStone:Interact( args )
-	if not self.linkedPosition then
-		return false
-	elseif self.linkedPosition then
+function PortalStone:Interact(args)
+	if self.linkedPosition then
 		self:RaiseClientEvent("ClientEvent_TeleportToLinked", {
 			playerToAffect = args.player.object
 			})
@@ -39,7 +36,7 @@ function PortalStone:Interact( args )
 end
 
 -------------------------------------------------------------------------------
-function PortalStone:TryPickup( target )
+function PortalStone:TryPickup(target)
 	self.linkedPosition = nil
 	self:NKSetEmitterActive(false)
 	return true
@@ -48,12 +45,7 @@ end
 -------------------------------------------------------------------------------
 function PortalStone:Spawn()
 	if self.linkedPosition then
-		if self.IsLive() then
-			self:NKSetEmitterActive(true)
-		else
-			self.linkedPosition = nil
-			self:NKSetEmitterActive(false)
-		end
+		self:NKSetEmitterActive(true)
 	else
 		self:NKSetEmitterActive(false)
 	end
@@ -71,22 +63,6 @@ function PortalStone:ClientEvent_TeleportToLinked(args)
 	worldPlayer:NKTeleportToLocation(self.linkedPosition)
 end
 
--------------------------------------------------------------------------------
-function PortalStone:IsLive()
-	--checking whether a portal stone is still at the exit.
-	local minPos = vec3.new(-.5)
-	local maxPos = vec3.new(.5)
-	local gameobjects = NKPhysics.AABBOverlapCollect(minPos, maxPos, self.linkedPosition)
-	if gameobjects then
-		for objID, objData in pairs(gameobjects) do
-			local objName = objData:NKGetName()
-			if objName == "Portal Stone" then
-				return true
-			end
-		end
-	end
-	return false
-end
 -------------------------------------------------------------------------------
 function PortalStone:Save( outData )
 	PortalStone.__super.Save(self, outData)

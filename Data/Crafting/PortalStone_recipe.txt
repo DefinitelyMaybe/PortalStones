@@ -7,14 +7,15 @@ All Recipes
 		LuaData
 		{
 			craftTime = 5.0
+			priority = 1.0
 			
 			Components
 			{
-				Part1
+				Grey
 				{
 					"Cobblestone" = 400
 				}
-				Part2
+				Black
 				{
 					"Black Rock" = 1
 				}
