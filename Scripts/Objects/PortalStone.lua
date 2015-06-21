@@ -20,7 +20,6 @@ PortalStone.RegisterScriptEvent("ClientEvent_SetLink",
 
 -------------------------------------------------------------------------------
 function PortalStone:Constructor(args)
-	--Note: The only "false" values in lua are nil and false.
 	self.linkedPosition = nil
 end
 
@@ -31,7 +30,6 @@ function PortalStone:Interact(args)
 			playerToAffect = args.player.object
 			})
 	end
-	--Don't drop held object if Portal Stone was linked.
 	return true
 end
 

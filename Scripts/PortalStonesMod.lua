@@ -1,4 +1,6 @@
 --PortalStonesMod
+include("Scripts/Objects/PortalLinker.lua")
+
 -------------------------------------------------------------------------------
 if PortalStonesMod == nil then
 	PortalStonesMod = EternusEngine.ModScriptClass.Subclass("PortalStonesMod")
@@ -6,6 +8,7 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStonesMod:Constructor()
+	PortalStonesMod.LinkManager = include( "Scripts/Core/LinkManager.lua").new(self)
 end
 
  -------------------------------------------------------------------------------
@@ -17,6 +20,16 @@ end
 -------------------------------------------------------------------------------
 -- Called from C++ when the current game enters 
 function PortalStonesMod:Enter()
+end
+
+-------------------------------------------------------------------------------
+function PortalStonesMod:Save()
+	PortalStonesMod.LinkManager:Save()
+end
+
+-------------------------------------------------------------------------------
+function PortalStonesMod:Restore()
+	PortalStonesMod.LinkManager:Restore()
 end
 
 -------------------------------------------------------------------------------
