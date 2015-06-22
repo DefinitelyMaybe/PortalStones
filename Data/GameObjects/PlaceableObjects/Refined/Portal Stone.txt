@@ -30,7 +30,8 @@ GameObjects
 				Diffuse
 				{
 					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff3.png"
-					1 = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff.png"
+					"diffuse_off" = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff3.png"
+					"diffuse_on" = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff.png"
 				}
 				Normal
 				{
@@ -38,7 +39,7 @@ GameObjects
 				}
 				Glow
 				{
-					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Glow.png"
+					"glow_on" = "Models/PlaceableObjects/Refined/MagicStonePillar_Glow.png"
 				}
 
 			}
