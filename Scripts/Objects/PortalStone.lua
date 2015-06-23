@@ -4,9 +4,8 @@ include("Scripts/Objects/PlaceableObject.lua")
 -------------------------------------------------------------------------------
 PortalStone = PlaceableObject.Subclass("PortalStone")
 
-PortalStone.RegisterScriptEvent("NetEvent_TeleportToLinked",
+PortalStone.RegisterScriptEvent("ClientEvent_TeleportToLinked",
 	{
-	player = "gameobject",
 	position = "vec3"
 	}
 )
@@ -24,18 +23,18 @@ function PortalStone:Interact(args)
 	if self.targetID then
 		local position = PortalStonesMod.LinkManager:Get(self.targetID)
 		if position then
-			self:RaiseNetEvent("NetEvent_TeleportToLinked", {
-				player = args.player.object,
-				position = position
-				})
+			self:RaiseClientEvent("ClientEvent_TeleportToLinked", 
+									{ position = position },
+									{ args.player:NKGetInstance().m_connection }
+								)
 		end
 	end
 	return true
 end
 
 -------------------------------------------------------------------------------
-function PortalStone:NetEvent_TeleportToLinked(args)
-	local worldPlayer = args.player:NKGetWorldPlayer()
+function PortalStone:ClientEvent_TeleportToLinked(args)
+	local worldPlayer = Eternus.World:NKGetLocalWorldPlayer()
 	worldPlayer:NKTeleportToLocation(args.position)
 end
 
