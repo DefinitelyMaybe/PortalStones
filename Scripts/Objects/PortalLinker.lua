@@ -14,10 +14,12 @@ function PortalLinker:SecondaryAction(args)
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
 		local Stone = args.targetObj:NKGetInstance()
 		if self.linkID then
-			if Stone and Stone.SetTargetID then
-				self.linkID = Stone:SetTargetID(self.linkID)
-				self.linkID = nil
-				self:ModifyStackSize(-1)
+			if not (Stone:GetLinkID() == self.linkID) then
+				if Stone and Stone.SetTargetID then
+					self.linkID = Stone:SetTargetID(self.linkID)
+					self.linkID = nil
+					self:ModifyStackSize(-1)
+				end
 			end
 		else
 			if Stone and Stone.GetLinkID then
