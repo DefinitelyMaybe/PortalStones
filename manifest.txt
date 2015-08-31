@@ -1,19 +1,14 @@
 Manifest
 {
-	# Name of the mods.
 	Name = "Portal Stones Mod"
 
 	# Author = Rawr
 
-	# Description of the mod.
 	Description = "Getting places with magic"
 
-	# Version number.
-	Version = 1.0
+	MajorVersion = 0.8.6
 
-	# The file path to the script that is the entry point.
 	ScriptFile = "Scripts/PortalStonesMod.lua"
 
-	# The script entry point class name
 	ScriptClass = "PortalStonesMod"
 }

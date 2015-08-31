@@ -1,4 +1,4 @@
-All Recipes
+Magic Recipes
 {
 	Portal Stone Recipe
 	{	
@@ -11,11 +11,11 @@ All Recipes
 			
 			Components
 			{
-				Grey
+				TheStonePart
 				{
 					"Cobblestone" = 400
 				}
-				Black
+				TheMagicPart
 				{
 					"Black Rock" = 1
 				}

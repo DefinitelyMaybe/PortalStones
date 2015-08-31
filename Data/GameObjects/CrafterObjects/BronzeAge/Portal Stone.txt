@@ -4,7 +4,7 @@ GameObjects
 	{
 		Portal Stone
 		{
-			Tag = "Refined"
+			Tag = "BronzeAge"
 
 			Transform
 			{
@@ -14,9 +14,12 @@ GameObjects
 			{
 				file = "Scripts/Objects/PortalStone.lua"
 				class = "PortalStone"
+				
 				arguments
 				{
-					encumbrance = 2
+					encumbrance = 15.0
+					failChance = 0.1
+
 					dataMetricCategory = "Alchemical"
 					UBPcraft = 4
 					LBPcraft = 4
@@ -26,20 +29,20 @@ GameObjects
 
 			StaticGraphics
 			{
-				model = "Models/PlaceableObjects/Refined/MagicStonePillar.obj"
+				model = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar.obj"
 				Diffuse
 				{
-					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff3.png"
-					"diffuse_off" = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff3.png"
-					"diffuse_on" = "Models/PlaceableObjects/Refined/MagicStonePillar_Diff.png"
+					0 = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar_Diff3.png"
+					"diffuse_off" = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar_Diff3.png"
+					"diffuse_on" = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar_Diff.png"
 				}
 				Normal
 				{
-					0 = "Models/PlaceableObjects/Refined/MagicStonePillar_Norm.png"
+					0 = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar_Norm.png"
 				}
 				Glow
 				{
-					"glow_on" = "Models/PlaceableObjects/Refined/MagicStonePillar_Glow.png"
+					"glow_on" = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar_Glow.png"
 				}
 
 			}
@@ -50,9 +53,10 @@ GameObjects
 				{
 					Mesh
 					{
-						mass = 100
+						mass = 80.0
 						convex = 0
-						mesh = "Models/PlaceableObjects/Refined/MagicStonePillar.obj"
+						material = "WOOD"
+						mesh = "Models/PlaceableObjects/CrafterObjects/MagicStonePillar.obj"
 					}
 				}
 
@@ -72,7 +76,7 @@ GameObjects
 				category = "Stone"
 				tier = 3
 				resource = 1
-				maxStackCount = 10
+				maxStackCount = 1
 				placeWithNoPhysics = 1
 				
 				survivalFaceCamera = 1
