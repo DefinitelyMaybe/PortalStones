@@ -84,11 +84,11 @@ function PortalStone:NetDeserialize( stream )
 	self:SetActive(active)
 end
 
---------------------------------------------------
+-------------------------------------------------------------------------------
 function PortalStone:SetActive( active )
 	if self.active ~= active then
 		self.active = active
-		NKWarn("PortalStone:SetActive( " .. tostring(active) .. " )")
+		NKPrint("PortalStone:SetActive( " .. tostring(active) .. " )")
 		if Eternus.IsClient then
 			if active then
 				self:NKSetEmitterActive(true)

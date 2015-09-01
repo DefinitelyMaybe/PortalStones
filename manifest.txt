@@ -1,8 +1,8 @@
 Manifest
 {
-	Name = "Portal Stones Mod"
+	# Author: Rawr
 
-	# Author = Rawr
+	Name = "Portal Stones Mod"
 
 	Description = "Getting places with magic"
 
