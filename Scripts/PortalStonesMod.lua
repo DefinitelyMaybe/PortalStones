@@ -8,7 +8,6 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStonesMod:Constructor()
-	-- create new static variable LinkManager on PortalStonesMod
 	PortalStonesMod.LinkManager = include( "Scripts/Core/LinkManager.lua").new(self)
 end
 
@@ -19,11 +18,6 @@ function PortalStonesMod:Initialize()
 end
 
 -------------------------------------------------------------------------------
--- Called from C++ when the current game enters 
-function PortalStonesMod:Enter()
-end
-
--------------------------------------------------------------------------------
 function PortalStonesMod:Save()
 	PortalStonesMod.LinkManager:Save()
 end
@@ -31,11 +25,6 @@ end
 -------------------------------------------------------------------------------
 function PortalStonesMod:Restore()
 	PortalStonesMod.LinkManager:Restore()
-end
-
--------------------------------------------------------------------------------
--- Called from C++ when the game leaves it current mode
-function PortalStonesMod:Leave()
 end
 
 -------------------------------------------------------------------------------
@@ -48,11 +37,6 @@ end
 -- Called from C++ when the game leaves it current mode
 function PortalStonesMod:Restore()
 	PortalStonesMod.LinkManager:Restore()
-end
-
--------------------------------------------------------------------------------
--- Called from C++ every update tick
-function PortalStonesMod:Process(dt)
 end
 
 -------------------------------------------------------------------------------

@@ -25,7 +25,7 @@ function PortalStone:Interact(args)
 		if position then
 			self:RaiseClientEvent("ClientEvent_TeleportToLinked", 
 									{ position = position },
-									{ args.player:NKGetInstance().m_connection }
+									{ args.player.m_connection }
 								)
 		end
 	end
