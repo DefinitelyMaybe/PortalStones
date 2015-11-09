@@ -24,9 +24,8 @@ function PortalStone:Interact(args)
 		local position = PortalStonesMod.LinkManager:Get(self.targetID)
 		if position then
 			self:RaiseClientEvent("ClientEvent_TeleportToLinked", 
-									{ position = position },
-									{ args.player.m_connection }
-								)
+					{ position = position },
+					{ args.player:NKGetInstance().m_connection })
 		end
 	end
 	return true

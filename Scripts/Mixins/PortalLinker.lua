@@ -1,9 +1,7 @@
-include("Scripts/Objects/Equipable.lua")
-include("Scripts/Objects/Crystal.lua")
-include("Scripts/Objects/Consumable.lua")
+--include("Scripts/Objects/Consumable.lua")
 
 -------------------------------------------------------------------------------
-PortalLinker = EternusEngine.Class.Subclass("PortalLinker")
+PortalLinker = EternusEngine.Mixin.Subclass("PortalLinker")
 
 -------------------------------------------------------------------------------
 function PortalLinker:Constructor(args)
@@ -11,15 +9,15 @@ function PortalLinker:Constructor(args)
 end
 
 -------------------------------------------------------------------------------
-function PortalLinker:Spawn()
-	self:NKSetEmitterActive(false)
-end
+--function PortalLinker:Spawn()
+--	self:NKSetEmitterActive(false)
+--end
 
 -------------------------------------------------------------------------------
 function PortalLinker:SecondaryAction(args)
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
 		-- Bonus emitter on the crystal to indicate linking
-		self:NKSetEmitterActive(true)
+		--self:NKSetEmitterActive(true)
 
 		local Stone = args.targetObj:NKGetInstance()
 		if self.m_linkID then
@@ -28,7 +26,7 @@ function PortalLinker:SecondaryAction(args)
 					self.m_linkID = Stone:SetTargetID(self.m_linkID)
 					self.m_linkID = nil
 					self:ModifyStackSize(-1)
-					self:NKSetEmitterActive(false)
+					--self:NKSetEmitterActive(false)
 				end
 			end
 		else
