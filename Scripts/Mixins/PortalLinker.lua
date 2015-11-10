@@ -1,11 +1,23 @@
---include("Scripts/Objects/Consumable.lua")
+include("Scripts/Objects/Crystal.lua")
+include("Scripts/Objects/Equipable.lua")
 
 -------------------------------------------------------------------------------
 PortalLinker = EternusEngine.Mixin.Subclass("PortalLinker")
 
 -------------------------------------------------------------------------------
 function PortalLinker:Constructor(args)
+	NKPrint("Froststone Shard Constructor.")
 	self.m_linkID = nil
+
+	local crystalConstructor = Crystal.Constructor
+	Crystal.Constructor = function(self, args)
+		crystalConstructor(self, args)
+		if self:GetName() == "Froststone Shard" then
+			NKPrint("Froststone Shard injecting mixin.")
+			self:Mixin(self, args)
+			NKPrint("Froststone Shard injecting end.")
+		end
+	end
 end
 
 -------------------------------------------------------------------------------
@@ -14,12 +26,14 @@ end
 --end
 
 -------------------------------------------------------------------------------
-function PortalLinker:SecondaryAction(args)
+-- The default Primary Action that an equipable object should execute
+function PortalLinker:DefaultPrimaryAction( args )
+	NKPrint("PortalLinker DefaultPrimaryAction function called")
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
 		-- Bonus emitter on the crystal to indicate linking
 		--self:NKSetEmitterActive(true)
 
-		local Stone = args.targetObj:NKGetInstance()
+		local Stone = args.targetObj
 		if self.m_linkID then
 			if not (Stone:GetLinkID() == self.m_linkID) then
 				if Stone and Stone.SetTargetID then

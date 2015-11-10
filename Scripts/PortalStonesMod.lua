@@ -1,7 +1,4 @@
 --PortalStonesMod
-include("Scripts/Objects/Crystal.lua")
-include("Scripts/Mixins/PortalLinker.lua")
-
 -------------------------------------------------------------------------------
 if PortalStonesMod == nil then
 	PortalStonesMod = EternusEngine.ModScriptClass.Subclass("PortalStonesMod")
@@ -18,19 +15,6 @@ function PortalStonesMod:Initialize()
 	Eternus.CraftingSystem:ParseRecipeFile("Data/Crafting/PortalStone_recipe.txt", "Magic Items")
 end
 
-function PortalStonesMod:Enter()
-	--Cache the base constructor
-	local crystalConstructor = Crystal.Constructor
-	--Override the constructor
-	Crystal.Constructor = function(self, args)
-		-- Call the base constructor
-		crystalConstructor(self, args)
-		-- Inject mixin
-		if self:GetName() == "Froststone Shard" then
-			self:PortalLinker(PortalLinker, args)
-		end
-	end
-end
 -------------------------------------------------------------------------------
 function PortalStonesMod:Save()
 	PortalStonesMod.LinkManager:Save()
