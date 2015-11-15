@@ -14,7 +14,8 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStone:Interact(args)
-	NKPrint("PortalStone:Interact function called.")
+	NKPrint("PortalStone Interact function called.")
+	if args then
 	if self.targetID then
 		local position = PortalStonesMod.LinkManager:Get(self.targetID)
 		if position then

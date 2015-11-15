@@ -1,34 +1,47 @@
-include("Scripts/Objects/Crystal.lua")
 include("Scripts/Objects/Equipable.lua")
 
--------------------------------------------------------------------------------
 PortalLinker = EternusEngine.Mixin.Subclass("PortalLinker")
 
--------------------------------------------------------------------------------
-function PortalLinker:Constructor(args)
-	NKPrint("Froststone Shard Constructor.")
-	self.m_linkID = nil
+PortalLinker.__mixinoverrides =
+	{
+		"AffectObject",
+		"CanToolAffectObject"
+	}
 
-	local crystalConstructor = Crystal.Constructor
-	Crystal.Constructor = function(self, args)
-		crystalConstructor(self, args)
-		if self:GetName() == "Froststone Shard" then
-			NKPrint("Froststone Shard injecting mixin.")
-			self:Mixin(self, args)
-			NKPrint("Froststone Shard injecting end.")
-		end
+-------------------------------------------------------------------------------
+local cConstr = Equipable.Constructor
+
+Equipable.Constructor = function(args)
+	cConstr(args)
+	if self:GetName() == "Crude Axe" then
+		self:Mixin(PortalLinker, args)
 	end
 end
 
+-------------------------------------------------------------------------------
+function PortalLinker:Constructor( args )
+	self.m_linkID = nil
+end
 -------------------------------------------------------------------------------
 --function PortalLinker:Spawn()
 --	self:NKSetEmitterActive(false)
 --end
 
 -------------------------------------------------------------------------------
+function PortalLinker:CanToolAffectObject( args )
+	NKPrint("PortalLinker CanToolAffectObject function called")
+	if args then
+		if args:NKGetName() == "Portal Stone" then
+			return true
+		end
+	end
+	return false
+end
+
+-------------------------------------------------------------------------------
 -- The default Primary Action that an equipable object should execute
-function PortalLinker:DefaultPrimaryAction( args )
-	NKPrint("PortalLinker DefaultPrimaryAction function called")
+function PortalLinker:AffectObject( args )
+	NKPrint("PortalLinker AffectObject function called")
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
 		-- Bonus emitter on the crystal to indicate linking
 		--self:NKSetEmitterActive(true)
@@ -48,10 +61,8 @@ function PortalLinker:DefaultPrimaryAction( args )
 				self.m_linkID = Stone:GetLinkID()
 			end
 		end
-		-- Don't drop Linker if it was a Portal Stone.
-		return true
 	else
-		return false
+		return
 	end
 end
 

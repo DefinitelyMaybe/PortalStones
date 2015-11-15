@@ -6,6 +6,7 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStonesMod:Constructor()
+	NKPrint("Portal Stones Mod.")
 	PortalStonesMod.LinkManager = include( "Scripts/Core/LinkManager.lua").new(self)
 end
 
@@ -25,6 +26,9 @@ function PortalStonesMod:Restore()
 	PortalStonesMod.LinkManager:Restore()
 end
 
+-------------------------------------------------------------------------------
+function PortalStonesMod:Enter()
+end
 -------------------------------------------------------------------------------
 -- Called from C++ when the current game enters 
 function PortalStonesMod:Save()
