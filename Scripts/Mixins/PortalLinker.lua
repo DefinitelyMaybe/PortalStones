@@ -13,9 +13,9 @@ function PortalLinker:Constructor( args )
 	self.m_linkID = nil
 end
 -------------------------------------------------------------------------------
---function PortalLinker:Spawn()
---	self:NKSetEmitterActive(false)
---end
+function PortalLinker:Spawn()
+	self:NKSetEmitterActive(false)
+end
 
 -------------------------------------------------------------------------------
 function PortalLinker:CanToolAffectObject( args )
@@ -32,7 +32,7 @@ end
 function PortalLinker:AffectObject( args )
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
 		-- Bonus emitter on the crystal to indicate linking
-		--self:NKSetEmitterActive(true)
+		self:NKSetEmitterActive(true)
 
 		local Stone = args.targetObj
 		if self.m_linkID then
@@ -41,7 +41,7 @@ function PortalLinker:AffectObject( args )
 					self.m_linkID = Stone:SetTargetID(self.m_linkID)
 					self.m_linkID = nil
 					self:ModifyStackSize(-1)
-					--self:NKSetEmitterActive(false)
+					self:NKSetEmitterActive(false)
 				end
 			end
 		else

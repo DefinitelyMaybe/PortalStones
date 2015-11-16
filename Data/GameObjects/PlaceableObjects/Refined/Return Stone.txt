@@ -1,0 +1,141 @@
+
+GameObjects
+{
+	PlaceableObject
+	{
+		Return Stone
+		{
+			Tag = "Refined"
+			
+			Transform
+			{
+			}
+			Script
+			{
+				file = "Scripts/Objects/ReturnStone.lua"
+				class = "ReturnStone"
+			
+				arguments
+				{
+					encumbrance = 1
+					//offset = <-0.074, 0.159, 0.136>
+					//rotOffset = <38.584, -2.316, -18.013>
+					
+					dataMetricCategory = "Magic"
+					UBPcraft = 5
+					LBPcraft = 5
+					XPcraft = 10
+				}
+			}
+			StaticGraphics
+			{
+				model = "Models/PlaceableObjects/Refined/returnStone.obj"
+				dontCastShadows = 1.0
+			
+				Diffuse
+				{
+					0 = "Models/PlaceableObjects/Refined/returnStone_diff.tga"
+				}
+				Normal
+				{
+					0 = "Models/PlaceableObjects/Refined/returnStone_norm.tga"
+				}
+				Glow
+				{
+					0 = "Models/PlaceableObjects/Refined/returnStone_glow.tga"
+				}
+			}
+			#RigidBody
+			#{
+			#	activePhysics = 1
+			#	mass = 1.0
+			#	friction = 100.0
+			#}
+			Physics
+			{
+				Colliders
+				{
+					Mesh
+					{
+						mass = 5.0
+						convex = 0
+						material = "DIRT"
+					}
+				}
+				Rigidbody
+				{
+					keyframed = 1
+				}
+			}
+
+			Equipable
+			{
+				name = "Return Stone"
+				icon = "returnStoneFull"
+				minScale = 1.0
+				maxScale = 1.0
+
+				category = "Magic"
+				tier = 3
+				resource = 1
+				maxStackCount = 1
+				durability = 5.0
+				damageToCharacters = 5.0
+				damageToObjects = 5.0
+
+				placementSound = "StonePlace"
+
+				Equipment Slots
+				{
+					Tool
+				}
+			}
+
+			Children
+			{
+				Wisp Blue Body Emitter
+				{
+					offset = <0.0, 0.0, 0.0>
+				}
+			}
+		}
+		Return Stone FX
+		{
+			Tag = "Refined"
+			
+			Transform
+			{
+			}
+			#RigidBody
+			#{
+				#activePhysics = 0
+				#mass = 1.0
+				#friction = 1.0
+			#}		
+			Placeable
+			{
+				name = "Return Stone FX"
+				//icon = "fxIcon"
+				minScale = 0.5
+				maxScale = 1.0
+
+				category = "None"
+				tier = 0
+
+				placementSound = "GrassPlace"
+			}
+			Children
+			{
+				Return Emitter
+				{
+					offset = <0.0, 0.2, 0.0>
+				}
+				
+				//Return Emitter Stripe
+				//{
+				//	offset = <0.0, 0.1, 0.0>
+				//}
+			}
+		}
+	}
+}
