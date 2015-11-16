@@ -28,6 +28,15 @@ end
 
 -------------------------------------------------------------------------------
 function PortalStonesMod:Enter()
+	include("Scripts/Objects/ReturnStone.lua")
+	include("Scripts/Mixins/PortalLinker.lua")
+
+	local ReturnStoneConstructor = ReturnStone.Constructor
+
+	ReturnStone.Constructor = function(self, args)
+		ReturnStoneConstructor(self, args)
+		self:Mixin(PortalLinker, args)
+	end
 end
 -------------------------------------------------------------------------------
 -- Called from C++ when the current game enters 

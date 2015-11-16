@@ -74,7 +74,7 @@ GameObjects
 				maxScale = 1
 
 				category = "Stone"
-				tier = 1
+				tier = 3
 				resource = 1
 				maxStackCount = 1
 				placeWithNoPhysics = 1

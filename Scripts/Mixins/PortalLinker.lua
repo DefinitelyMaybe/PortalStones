@@ -1,22 +1,12 @@
-include("Scripts/Objects/Equipable.lua")
-
 PortalLinker = EternusEngine.Mixin.Subclass("PortalLinker")
+
 
 PortalLinker.__mixinoverrides =
 	{
 		"AffectObject",
-		"CanToolAffectObject"
+		"CanToolAffectObject",
+		"PrimaryAction"
 	}
-
--------------------------------------------------------------------------------
-local cConstr = Equipable.Constructor
-
-Equipable.Constructor = function(args)
-	cConstr(args)
-	if self:GetName() == "Crude Axe" then
-		self:Mixin(PortalLinker, args)
-	end
-end
 
 -------------------------------------------------------------------------------
 function PortalLinker:Constructor( args )
@@ -29,7 +19,6 @@ end
 
 -------------------------------------------------------------------------------
 function PortalLinker:CanToolAffectObject( args )
-	NKPrint("PortalLinker CanToolAffectObject function called")
 	if args then
 		if args:NKGetName() == "Portal Stone" then
 			return true
@@ -41,7 +30,6 @@ end
 -------------------------------------------------------------------------------
 -- The default Primary Action that an equipable object should execute
 function PortalLinker:AffectObject( args )
-	NKPrint("PortalLinker AffectObject function called")
 	if args.targetObj and args.targetObj:NKGetName() == "Portal Stone" then
 		-- Bonus emitter on the crystal to indicate linking
 		--self:NKSetEmitterActive(true)
@@ -61,9 +49,25 @@ function PortalLinker:AffectObject( args )
 				self.m_linkID = Stone:GetLinkID()
 			end
 		end
-	else
-		return
 	end
+end
+
+-------------------------------------------------------------------------------
+function ReturnStone:PrimaryAction(args)
+	if not self.m_bound then
+		if args.targetObj then
+			self:DefaultPrimaryAction(args)
+			return
+		else
+			return
+		end
+	end
+
+	self.m_player = args.player
+	args.player:RaiseClientEvent("Play3DSound", { sound = "SeedlingNeuriaLoss" } )
+	self:RaiseClientEvent("ClientEvent_TeleportToStone", { object = args.player})
+
+	self:ModifyHitPoints(-1)
 end
 
 -------------------------------------------------------------------------------
