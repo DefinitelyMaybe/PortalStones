@@ -10,19 +10,22 @@ function PortalStone:Constructor(args)
 	self.linkID = nil
 	self.targetID = nil
 	self.active = false
+	self.EnergyRequired = 90
 end
 
 -------------------------------------------------------------------------------
 function PortalStone:Interact(args)
-	if args then
-		if self.targetID then
-			local position = PortalStonesMod.LinkManager:Get(self.targetID)
-			if position then
-				Eternus.World:NKGetLocalWorldPlayer():NKTeleportToLocation(position)
+	if args.player then
+		local x = args.player.m_energy:Value()
+		if (x - self.EnergyRequired) > 0 then
+			if self.targetID then
+				local position = PortalStonesMod.LinkManager:Get(self.targetID)
+				if position then
+					args.player:_ModifyEnergy(-self.EnergyRequired)
+					Eternus.World:NKGetLocalWorldPlayer():NKTeleportToLocation(position)
+				end
 			end
 		end
-	else
-		return true
 	end
 end
 
