@@ -2,8 +2,14 @@
 
 Install Guide:
 
-download zip ->
+download zip -->
 
-unzip to TUG/Mods folder
+unzip into your TUG/Mods folder
 
-add "Mods/PortalStonesMod" to Config/mods.txt
+Open up the Config/mods.txt file
+
+add "Mods/PortalStonesMod" to the top of the list.
+
+Restart/Start TUG
+
+Enjoy :)
